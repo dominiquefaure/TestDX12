@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="WinResources">
+      <UniqueIdentifier>{4938816f-c51b-4485-bfe1-5f9328483fd9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Sources\Sample01\Sample.cpp" />
+    <ClCompile Include="..\..\Sources\Sample01\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Sources\Sample01\Sample.h" />
+    <ClInclude Include="..\..\Sources\Sample01\WinResources\targetver.h">
+      <Filter>WinResources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Sample01\WinResources\header.h">
+      <Filter>WinResources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Sample01\WinResources\resource.h">
+      <Filter>WinResources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Sources\Sample01\WinResources\Sample.rc">
+      <Filter>WinResources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Sources\Sample01\WinResources\small.ico">
+      <Filter>WinResources</Filter>
+    </Image>
+    <Image Include="..\..\Sources\Sample01\WinResources\Sample.ico">
+      <Filter>WinResources</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
