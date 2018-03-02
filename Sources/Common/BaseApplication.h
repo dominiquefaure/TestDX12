@@ -3,12 +3,10 @@
 
 #include<Windows.h>
 
+#include "Application/GameApplication.h"
 
-#include "FleedCore.h"
 
-using namespace FleedCore;
-
-class BaseApplication : public FleedApplication
+class BaseApplication : public GameApplication
 {
 public:
 

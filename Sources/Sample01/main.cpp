@@ -1,6 +1,6 @@
 
 #include "Sample.h"
-
+#include "../Common/Application/WinMainLauncher.h"
 
 
 WinMainLauncher	g_launcher;

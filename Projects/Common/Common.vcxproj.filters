@@ -2,8 +2,28 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\Sources\Common\BaseApplication.cpp" />
+    <ClCompile Include="..\..\Sources\Common\Application\WinMainLauncher.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\Common\Application\GameApplication.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\BaseApplication.h" />
+    <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\Application\WindowsAppConfig.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\Application\GameApplication.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{99f3e407-6bd4-4af3-9f97-566626cb5528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
