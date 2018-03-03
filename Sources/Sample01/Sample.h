@@ -3,10 +3,9 @@
 #include <Windows.h>
 
 
-#include "BaseApplication.h"
+#include "Application/GameApplication.h"
 
-
-class Sample : public BaseApplication
+class Sample : public GameApplication
 {
 public:
 

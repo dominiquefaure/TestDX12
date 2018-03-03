@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\Sources\Common\BaseApplication.cpp" />
     <ClCompile Include="..\..\Sources\Common\Application\WinMainLauncher.cpp">
       <Filter>Application</Filter>
     </ClCompile>
@@ -10,7 +9,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Sources\Common\BaseApplication.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h">
       <Filter>Application</Filter>
     </ClInclude>
@@ -20,10 +18,16 @@
     <ClInclude Include="..\..\Sources\Common\Application\GameApplication.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\Utilities\d3dx12.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
       <UniqueIdentifier>{99f3e407-6bd4-4af3-9f97-566626cb5528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{17257a41-407d-4039-ad55-9fd8a86123ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

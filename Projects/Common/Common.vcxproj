@@ -21,13 +21,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\Sources\Common\Application\GameApplication.cpp" />
     <ClCompile Include="..\..\Sources\Common\Application\WinMainLauncher.cpp" />
-    <ClCompile Include="..\..\Sources\Common\BaseApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\Application\GameApplication.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WindowsAppConfig.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h" />
-    <ClInclude Include="..\..\Sources\Common\BaseApplication.h" />
+    <ClInclude Include="..\..\Sources\Common\Utilities\d3dx12.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
