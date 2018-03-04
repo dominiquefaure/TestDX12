@@ -7,6 +7,9 @@
     <ClCompile Include="..\..\Sources\Common\Application\GameApplication.cpp">
       <Filter>Application</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Sources\Common\RenderCore\GpuFence.cpp">
+      <Filter>RenderCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h">
@@ -21,6 +24,12 @@
     <ClInclude Include="..\..\Sources\Common\Utilities\d3dx12.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\RenderCore\GpuFence.h">
+      <Filter>RenderCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\Utilities\CommonMacros.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -28,6 +37,9 @@
     </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{17257a41-407d-4039-ad55-9fd8a86123ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderCore">
+      <UniqueIdentifier>{b09cfe02-bf4c-47b9-ad5f-c00af25e8c5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

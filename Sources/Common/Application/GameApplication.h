@@ -8,6 +8,8 @@
 
 #include "WindowsAppConfig.h"
 
+#include "../RenderCore/GpuFence.h"
+
 
 // number of buffers we want, 2 for double buffering, 3 for tripple buffering
 #define FRAME_BUFFER_COUNT	3
@@ -107,10 +109,6 @@ protected:
 
 	ID3D12GraphicsCommandList* commandList; // a command list we can record commands into, then execute them to render the frame
 
-	ID3D12Fence* fence[ FRAME_BUFFER_COUNT ];    // an object that is locked while our command list is being executed by the gpu. We need as many 
-                                         //as we have allocators (more if we want to know when the gpu is finished with an asset)
-
-	HANDLE fenceEvent; // a handle to an event when our fence is unlocked by the gpu
 
 	UINT64 fenceValue[ FRAME_BUFFER_COUNT ]; // this value is incremented each frame. each fence will have its own value
 
@@ -120,6 +118,8 @@ protected:
 
 
 	bool	m_exitRequested;
+
+	GpuFence*	m_frameSyncFence;
 };
 
 #endif

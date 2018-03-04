@@ -89,8 +89,6 @@ void GameApplication::PerformDraw()
     // we want to wait for the gpu to finish executing the command list before we start releasing everything
     WaitForPreviousFrame();
 
-    // close the fence event
-    CloseHandle(fenceEvent);
 
 	UpdatePipeline();
 
@@ -104,16 +102,10 @@ void GameApplication::PerformDraw()
     // execute the array of command lists
     commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
-    // this command goes in at the end of our command queue. we will know when our command queue 
-    // has finished because the fence value will be set to "fenceValue" from the GPU since the command
-    // queue is being executed on the GPU
-    hr = commandQueue->Signal(fence[frameIndex], fenceValue[frameIndex]);
-    if (FAILED(hr))
-    {
-        m_exitRequested										=	true;
-    }
+	
+	fenceValue[frameIndex]									=	m_frameSyncFence->Signal( commandQueue );
 
-    // present the current backbuffer
+	// present the current backbuffer
     hr = swapChain->Present(0, 0);
     if (FAILED(hr))
     {
@@ -299,25 +291,8 @@ bool GameApplication::InitD3D( HWND a_handle )
     commandList->Close();
 
 
-    // -- Create a Fence & Fence Event -- //
-
-    // create the fences
-    for (int i = 0; i < frameBufferCount; i++)
-    {
-        hr = device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence[i]));
-        if (FAILED(hr))
-        {
-            return false;
-        }
-        fenceValue[i] = 0; // set the initial fence value to 0
-    }
-
-    // create a handle to a fence event
-    fenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
-    if (fenceEvent == nullptr)
-    {
-        return false;
-    }
+    // Create the Fence used to sync between each frames
+	m_frameSyncFence										=	new GpuFence( device );
 
 	return true;
 }
@@ -331,24 +306,8 @@ void GameApplication::WaitForPreviousFrame()
     // swap the current rtv buffer index so we draw on the correct buffer
     frameIndex = swapChain->GetCurrentBackBufferIndex();
 
-    // if the current fence value is still less than "fenceValue", then we know the GPU has not finished executing
-    // the command queue since it has not reached the "commandQueue->Signal(fence, fenceValue)" command
-    if (fence[frameIndex]->GetCompletedValue() < fenceValue[frameIndex])
-    {
-        // we have the fence create an event which is signaled once the fence's current value is "fenceValue"
-        hr = fence[frameIndex]->SetEventOnCompletion(fenceValue[frameIndex], fenceEvent);
-        if (FAILED(hr))
-        {
-        m_exitRequested										=	true;
-        }
-
-        // We will wait until the fence has triggered the event that it's current value has reached "fenceValue". once it's value
-        // has reached "fenceValue", we know the command queue has finished executing
-        WaitForSingleObject(fenceEvent, INFINITE);
-    }
-
-    // increment fenceValue for next frame
-    fenceValue[frameIndex]++;
+	// wait the Sync Fence reach the value
+	m_frameSyncFence->Wait( fenceValue[frameIndex] );
 
 }
 //---------------------------------------------------------------------------------------------

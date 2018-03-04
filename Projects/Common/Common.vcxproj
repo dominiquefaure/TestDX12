@@ -21,11 +21,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\Sources\Common\Application\GameApplication.cpp" />
     <ClCompile Include="..\..\Sources\Common\Application\WinMainLauncher.cpp" />
+    <ClCompile Include="..\..\Sources\Common\RenderCore\GpuFence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\Application\GameApplication.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WindowsAppConfig.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h" />
+    <ClInclude Include="..\..\Sources\Common\RenderCore\GpuFence.h" />
+    <ClInclude Include="..\..\Sources\Common\Utilities\CommonMacros.h" />
     <ClInclude Include="..\..\Sources\Common\Utilities\d3dx12.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
