@@ -273,16 +273,16 @@ bool GameApplication::InitD3D( HWND a_handle )
 
 	for (int i = 0; i < frameBufferCount; i++)
 	{
-		hr = device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commandAllocator[i]));
-		if (FAILED(hr))
+		m_commandAllocators[i]	=	new CommandAllocator();
+		if( ! m_commandAllocators[ i ]->Init( device , D3D12_COMMAND_LIST_TYPE_DIRECT ) )
 		{
 			return false;
 		}
 	}
 
     // create the command list with the first allocator
-    hr = device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator[0], NULL, IID_PPV_ARGS(&commandList));
-    if (FAILED(hr))
+	commandList	=	m_commandAllocators[0]->CreateCommandList();
+    if( commandList == NULL )
     {
         return false;
     }
@@ -326,11 +326,10 @@ void GameApplication::UpdatePipeline()
 
     // we can only reset an allocator once the gpu is done with it
     // resetting an allocator frees the memory that the command list was stored in
-    hr = commandAllocator[frameIndex]->Reset();
-    if (FAILED(hr))
-    {
+	if( !m_commandAllocators[ frameIndex]->Reset() )
+	{
         m_exitRequested										=	true;
-    }
+	}
 
     // reset the command list. by resetting the command list we are putting it into
     // a recording state so we can start recording commands into the command allocator.
@@ -342,7 +341,7 @@ void GameApplication::UpdatePipeline()
     // but in this tutorial we are only clearing the rtv, and do not actually need
     // anything but an initial default pipeline, which is what we get by setting
     // the second parameter to NULL
-    hr = commandList->Reset(commandAllocator[frameIndex], NULL);
+    hr = commandList->Reset( m_commandAllocators[frameIndex]->m_allocator, NULL);
     if (FAILED(hr))
     {
         m_exitRequested										=	true;

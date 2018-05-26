@@ -21,13 +21,16 @@
   <ItemGroup>
     <ClCompile Include="..\..\Sources\Common\Application\GameApplication.cpp" />
     <ClCompile Include="..\..\Sources\Common\Application\WinMainLauncher.cpp" />
+    <ClCompile Include="..\..\Sources\Common\RenderCore\CommandAllocator.cpp" />
     <ClCompile Include="..\..\Sources\Common\RenderCore\GpuFence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\Application\GameApplication.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WindowsAppConfig.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h" />
+    <ClInclude Include="..\..\Sources\Common\RenderCore\CommandAllocator.h" />
     <ClInclude Include="..\..\Sources\Common\RenderCore\GpuFence.h" />
+    <ClInclude Include="..\..\Sources\Common\RenderCore\Includes.h" />
     <ClInclude Include="..\..\Sources\Common\Utilities\CommonMacros.h" />
     <ClInclude Include="..\..\Sources\Common\Utilities\d3dx12.h" />
   </ItemGroup>
@@ -125,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -144,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -161,10 +164,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>

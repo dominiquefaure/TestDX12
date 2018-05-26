@@ -8,7 +8,7 @@
 
 #include "WindowsAppConfig.h"
 
-#include "../RenderCore/GpuFence.h"
+#include "../RenderCore/Includes.h"
 
 
 // number of buffers we want, 2 for double buffering, 3 for tripple buffering
@@ -105,7 +105,7 @@ protected:
 
 	ID3D12Resource* renderTargets[ FRAME_BUFFER_COUNT ]; // number of render targets equal to buffer count
 
-	ID3D12CommandAllocator* commandAllocator[ FRAME_BUFFER_COUNT ]; // we want enough allocators for each buffer * number of threads (we only have one thread)
+	CommandAllocator* m_commandAllocators[ FRAME_BUFFER_COUNT ];
 
 	ID3D12GraphicsCommandList* commandList; // a command list we can record commands into, then execute them to render the frame
 

@@ -10,6 +10,9 @@
     <ClCompile Include="..\..\Sources\Common\RenderCore\GpuFence.cpp">
       <Filter>RenderCore</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Sources\Common\RenderCore\CommandAllocator.cpp">
+      <Filter>RenderCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h">
@@ -29,6 +32,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Sources\Common\Utilities\CommonMacros.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\RenderCore\CommandAllocator.h">
+      <Filter>RenderCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\RenderCore\Includes.h">
+      <Filter>RenderCore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
