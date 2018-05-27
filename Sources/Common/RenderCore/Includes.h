@@ -3,5 +3,6 @@
 
 #include "GpuFence.h"
 #include "CommandAllocator.h"
+#include "CommandList.h"
 
 #endif

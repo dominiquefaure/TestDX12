@@ -97,8 +97,8 @@ void GameApplication::PerformDraw()
 	HRESULT hr;
 
     // create an array of command lists (only one command list here)
-    ID3D12CommandList* ppCommandLists[] = { commandList };
-
+    ID3D12CommandList* ppCommandLists[] = { m_commandList->m_commandList };
+	
     // execute the array of command lists
     commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
@@ -281,15 +281,11 @@ bool GameApplication::InitD3D( HWND a_handle )
 	}
 
     // create the command list with the first allocator
-	commandList	=	m_commandAllocators[0]->CreateCommandList();
-    if( commandList == NULL )
+	m_commandList	=	m_commandAllocators[0]->CreateCommandList();
+    if( m_commandList == NULL )
     {
         return false;
     }
-
-    // command lists are created in the recording state. our main loop will set it up for recording again so close it now
-    commandList->Close();
-
 
     // Create the Fence used to sync between each frames
 	m_frameSyncFence										=	new GpuFence( device );
@@ -331,43 +327,32 @@ void GameApplication::UpdatePipeline()
         m_exitRequested										=	true;
 	}
 
-    // reset the command list. by resetting the command list we are putting it into
-    // a recording state so we can start recording commands into the command allocator.
-    // the command allocator that we reference here may have multiple command lists
-    // associated with it, but only one can be recording at any time. Make sure
-    // that any other command lists associated to this command allocator are in
-    // the closed state (not recording).
-    // Here you will pass an initial pipeline state object as the second parameter,
-    // but in this tutorial we are only clearing the rtv, and do not actually need
-    // anything but an initial default pipeline, which is what we get by setting
-    // the second parameter to NULL
-    hr = commandList->Reset( m_commandAllocators[frameIndex]->m_allocator, NULL);
-    if (FAILED(hr))
-    {
+
+	if(! m_commandList->StartRecord( m_commandAllocators[ frameIndex] ) )
+	{
         m_exitRequested										=	true;
-    }
+	}
 
 	// here we start recording commands into the commandList (which all the commands will be stored in the commandAllocator)
 
     // transition the "frameIndex" render target from the present state to the render target state so the command list draws to it starting from here
-    commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(renderTargets[frameIndex], D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
+    m_commandList->m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(renderTargets[frameIndex], D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
 
     // here we again get the handle to our current render target view so we can set it as the render target in the output merger stage of the pipeline
     CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(rtvDescriptorHeap->GetCPUDescriptorHandleForHeapStart(), frameIndex, rtvDescriptorSize);
 
     // set the render target for the output merger stage (the output of the pipeline)
-    commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
+    m_commandList->m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
 
     // Clear the render target by using the ClearRenderTargetView command
     const float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };
-    commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+    m_commandList->m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
     
     // transition the "frameIndex" render target from the render target state to the present state. If the debug layer is enabled, you will receive a
     // warning if present is called on the render target when it's not in the present state
-    commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(renderTargets[frameIndex], D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
+    m_commandList->m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(renderTargets[frameIndex], D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
 
-    hr = commandList->Close();
-    if (FAILED(hr))
+	if( ! m_commandList->FinishRecord() )
     {
         m_exitRequested										=	true;
     }

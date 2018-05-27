@@ -2,6 +2,10 @@
 #include "../Utilities/CommonMacros.h"
 #include "assert.h"
 
+#include "CommandList.h"
+#include "CommandAllocator.h"
+
+
 //---------------------------------------------------------------------------------------------
 CommandAllocator::CommandAllocator()
 {
@@ -47,14 +51,15 @@ bool CommandAllocator::IsCompleted()
 //---------------------------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------------------------
-ID3D12GraphicsCommandList* CommandAllocator::CreateCommandList()
+CommandList* CommandAllocator::CreateCommandList()
 {
 	ID3D12GraphicsCommandList* t_list						=	nullptr;
 
 	VERIFYD3D12RESULT( m_device->CreateCommandList(0, m_type, m_allocator, NULL, IID_PPV_ARGS(&t_list)) );
 
+	CommandList* t_commandList								=	new CommandList( t_list );
 
-	return t_list;
+	return t_commandList;
 }
 //---------------------------------------------------------------------------------------------
 
@@ -71,5 +76,12 @@ bool CommandAllocator::Reset()
 	}
 
 	return true;
+}
+//---------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------
+void CommandAllocator::OnStartRecord( ID3D12GraphicsCommandList* a_commandList )
+{
+	a_commandList->Reset( m_allocator , nullptr );
 }
 //---------------------------------------------------------------------------------------------

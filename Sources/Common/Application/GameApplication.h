@@ -107,7 +107,7 @@ protected:
 
 	CommandAllocator* m_commandAllocators[ FRAME_BUFFER_COUNT ];
 
-	ID3D12GraphicsCommandList* commandList; // a command list we can record commands into, then execute them to render the frame
+	CommandList* m_commandList; // a command list we can record commands into, then execute them to render the frame
 
 
 	UINT64 fenceValue[ FRAME_BUFFER_COUNT ]; // this value is incremented each frame. each fence will have its own value

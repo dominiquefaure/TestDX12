@@ -22,6 +22,7 @@
     <ClCompile Include="..\..\Sources\Common\Application\GameApplication.cpp" />
     <ClCompile Include="..\..\Sources\Common\Application\WinMainLauncher.cpp" />
     <ClCompile Include="..\..\Sources\Common\RenderCore\CommandAllocator.cpp" />
+    <ClCompile Include="..\..\Sources\Common\RenderCore\CommandList.cpp" />
     <ClCompile Include="..\..\Sources\Common\RenderCore\GpuFence.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,7 @@
     <ClInclude Include="..\..\Sources\Common\Application\WindowsAppConfig.h" />
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h" />
     <ClInclude Include="..\..\Sources\Common\RenderCore\CommandAllocator.h" />
+    <ClInclude Include="..\..\Sources\Common\RenderCore\CommandList.h" />
     <ClInclude Include="..\..\Sources\Common\RenderCore\GpuFence.h" />
     <ClInclude Include="..\..\Sources\Common\RenderCore\Includes.h" />
     <ClInclude Include="..\..\Sources\Common\Utilities\CommonMacros.h" />

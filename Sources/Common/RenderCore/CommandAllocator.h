@@ -5,8 +5,11 @@
 
 #include "GpuFence.h"
 
+class CommandList;
+
 class CommandAllocator
 {
+	friend class CommandList;
 public:
 
 	CommandAllocator();
@@ -30,7 +33,11 @@ public:
 	/*
 	* Create a new Command List
 	*/
-	ID3D12GraphicsCommandList* CreateCommandList();
+	CommandList* CreateCommandList();
+
+private:
+
+	void OnStartRecord( ID3D12GraphicsCommandList* a_commandList );
 
 //private:
 

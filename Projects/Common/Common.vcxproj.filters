@@ -13,6 +13,9 @@
     <ClCompile Include="..\..\Sources\Common\RenderCore\CommandAllocator.cpp">
       <Filter>RenderCore</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Sources\Common\RenderCore\CommandList.cpp">
+      <Filter>RenderCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\Common\Application\WinMainLauncher.h">
@@ -37,6 +40,9 @@
       <Filter>RenderCore</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Sources\Common\RenderCore\Includes.h">
+      <Filter>RenderCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\Common\RenderCore\CommandList.h">
       <Filter>RenderCore</Filter>
     </ClInclude>
   </ItemGroup>
